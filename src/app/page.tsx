@@ -167,7 +167,7 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="h-screen flex bg-background">
+    <div className="h-screen flex bg-background flex-col sm:flex-row">
       {/* Sidebar */}
       <ChatSidebar
         chats={chats}
@@ -180,34 +180,34 @@ export default function ChatPage() {
       />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <header className="border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 px-4 py-4">
-          <div className="max-w-6xl mx-auto flex items-center justify-between">
-            <div className="flex items-center gap-3">
+        <header className="border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 px-3 sm:px-4 py-3 sm:py-4 sticky top-0 z-30">
+          <div className="max-w-6xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setSidebarOpen(true)}
-                className="md:hidden"
+                className="md:hidden shrink-0"
               >
                 <Menu size={20} />
               </Button>
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-primary shadow-md">
-                  <MessageSquare size={20} className="text-primary-foreground" />
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                <div className="p-1.5 sm:p-2 rounded-xl bg-primary shadow-md shrink-0">
+                  <MessageSquare size={18} className="text-primary-foreground sm:w-5 sm:h-5" />
                 </div>
-                <div>
-                  <h1 className="text-xl font-semibold text-foreground">
+                <div className="min-w-0 flex-1">
+                  <h1 className="text-lg sm:text-xl font-semibold text-foreground truncate">
                     {currentChat?.title || 'Free LLM'}
                   </h1>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground hidden sm:block">
                     powered by Google Gemini & Developed by BillyNabil
                   </p>
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 shrink-0">
               <ModelSelector
                 selectedModel={selectedModel}
                 onModelChange={setSelectedModel}
@@ -219,41 +219,41 @@ export default function ChatPage() {
 
         {/* Messages Area */}
         <main className="flex-1 overflow-y-auto bg-background">
-          <div className="max-w-5xl mx-auto px-4 py-8">
+          <div className="w-full max-w-5xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
             {currentChat?.messages.length === 0 ? (
-              <div className="text-center py-16 animate-fadeIn">
-                <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-primary shadow-lg mb-6">
-                  <MessageSquare size={40} className="text-primary-foreground" />
+              <div className="text-center py-8 sm:py-16 animate-fadeIn">
+                <div className="inline-flex items-center justify-center w-16 sm:w-24 h-16 sm:h-24 rounded-3xl bg-primary shadow-lg mb-4 sm:mb-6">
+                  <MessageSquare size={32} className="text-primary-foreground sm:w-10 sm:h-10" />
                 </div>
-                <h2 className="text-3xl font-bold text-foreground mb-3">
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2 sm:mb-3">
                   Welcome to AI Assistant
                 </h2>
-                <p className="text-lg text-muted-foreground mb-8">
+                <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 px-2">
                   Experience the power of Google Gemini AI
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
-                  <div className="bg-card border border-border p-4 rounded-xl transition-all hover:shadow-md">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 max-w-2xl mx-auto px-2">
+                  <div className="bg-card border border-border p-3 sm:p-4 rounded-xl transition-all hover:shadow-md">
                     <div className="text-left">
-                      <h3 className="font-semibold text-foreground mb-2">💬 Smart Conversations</h3>
-                      <p className="text-sm text-muted-foreground">Ask questions and get intelligent, contextual responses</p>
+                      <h3 className="font-semibold text-foreground mb-1 sm:mb-2 text-sm sm:text-base">💬 Smart Conversations</h3>
+                      <p className="text-xs sm:text-sm text-muted-foreground">Ask questions and get intelligent, contextual responses</p>
                     </div>
                   </div>
-                  <div className="bg-card border border-border p-4 rounded-xl transition-all hover:shadow-md">
+                  <div className="bg-card border border-border p-3 sm:p-4 rounded-xl transition-all hover:shadow-md">
                     <div className="text-left">
-                      <h3 className="font-semibold text-foreground mb-2">💾 Local Storage</h3>
-                      <p className="text-sm text-muted-foreground">Your chat history is saved locally and privately</p>
+                      <h3 className="font-semibold text-foreground mb-1 sm:mb-2 text-sm sm:text-base">💾 Local Storage</h3>
+                      <p className="text-xs sm:text-sm text-muted-foreground">Your chat history is saved locally and privately</p>
                     </div>
                   </div>
-                  <div className="bg-card border border-border p-4 rounded-xl transition-all hover:shadow-md">
+                  <div className="bg-card border border-border p-3 sm:p-4 rounded-xl transition-all hover:shadow-md">
                     <div className="text-left">
-                      <h3 className="font-semibold text-foreground mb-2">🤖 Multiple Models</h3>
-                      <p className="text-sm text-muted-foreground">Choose between Flash and Pro models for different needs</p>
+                      <h3 className="font-semibold text-foreground mb-1 sm:mb-2 text-sm sm:text-base">🤖 Multiple Models</h3>
+                      <p className="text-xs sm:text-sm text-muted-foreground">Choose between Flash and Pro models for different needs</p>
                     </div>
                   </div>
-                  <div className="bg-card border border-border p-4 rounded-xl transition-all hover:shadow-md">
+                  <div className="bg-card border border-border p-3 sm:p-4 rounded-xl transition-all hover:shadow-md">
                     <div className="text-left">
-                      <h3 className="font-semibold text-foreground mb-2">📤 Export Anytime</h3>
-                      <p className="text-sm text-muted-foreground">Export your conversations in various formats</p>
+                      <h3 className="font-semibold text-foreground mb-1 sm:mb-2 text-sm sm:text-base">📤 Export Anytime</h3>
+                      <p className="text-xs sm:text-sm text-muted-foreground">Export your conversations in various formats</p>
                     </div>
                   </div>
                 </div>
