@@ -145,11 +145,12 @@ export default function ChatPage() {
     } catch (error: any) {
       console.error('Error sending message:', error);
 
-      // Add error message
+      // Add error message with error flag
       const errorMessage: Message = {
         role: 'assistant',
         content: `Sorry, I encountered an error: ${error.message || 'Unknown error occurred'}. Please try again.`,
         timestamp: new Date().toISOString(),
+        isError: true,
       };
 
       const finalChat = {

@@ -4,7 +4,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import { Copy, Check } from 'lucide-react';
+import { Copy, Check, AlertCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Message } from '@/lib/types';
@@ -44,6 +44,8 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, isLoading }) => {
         <Card className={`px-3 sm:px-5 py-3 sm:py-4 transition-all duration-200 ${
           isUser 
             ? 'bg-primary text-primary-foreground' 
+            : message.isError
+            ? 'bg-destructive/10 border-destructive/50'
             : 'bg-card'
         }`}>
           <div className="flex items-start justify-between gap-2 sm:gap-4">
@@ -59,6 +61,14 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, isLoading }) => {
                       <div className="w-2.5 h-2.5 bg-muted-foreground rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                       <div className="w-2.5 h-2.5 bg-muted-foreground rounded-full animate-bounce [animation-delay:-0.15s]"></div>
                       <div className="w-2.5 h-2.5 bg-muted-foreground rounded-full animate-bounce"></div>
+                    </div>
+                  ) : message.isError ? (
+                    <div className="flex items-start gap-3">
+                      <AlertCircle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-sm sm:text-base text-destructive font-medium">Error</p>
+                        <p className="text-sm sm:text-base text-foreground mt-1 leading-relaxed">{message.content}</p>
+                      </div>
                     </div>
                   ) : (
                     <ReactMarkdown
